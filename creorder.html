@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" href="img/logo.png" />
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-8 menu01">
+					<a href="index.html"><img src="img/logo.png" class="logo"></a>
+					<a href="index.html">Home</a>
+					<a href="history.html">History</a>
+					<a href="about.html">About us</a>
+				</div>
+				<div class="col-4 menu02">
+					<div id="nosign">
+						<a href="register.html">Register</a>
+						<div class="vl"></div>
+						<a href="login.html">Log in</a>
+					</div>
+					<div id="insign">
+						<div class="row"><a href="profile.html" id="headeruser"></a></div>
+						<div class="row"><button onclick="sign()" class="whitebut">Log out</button></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="hidhead"></div>
+	<div class="openbtn" onclick="openNav()" id="openNav">☰</div>
+
+	<div class="sidebar" id="mySidebar">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+		<a href="index.html" id="m1">Home</a>
+		<div id="hidsign"></div>
+		<a href="history.html" id="m2">History</a>
+		<a href="about.html" id="m3">About us</a>
+	</div>
+	<div id="sign" style="display: none;"></div>
+	<div id="buyc" style="display: none;"></div>
+	<div id="sellc" style="display: none;"></div>
+	<div id="add" style="display: none;"></div>
+	<div id="con" style="display: none;"></div>
+	<div id="hisor" style="display: none;"></div>
+
+	<div class="body01">
+		<div class="container" style="border: 1px black solid;padding: 0;">
+			<div style="background-color: #2089CF;padding: 10px 0px;">
+				<h2 style="text-align: center;color: white;">Create Order</h2>
+			</div>
+			<div class="row" style="padding: 0px 5vw;padding-top: 40px;">
+				<div class="col-12 col-lg-3">
+					<p>Order type:  <select id="type" style="width: 200px;">
+						<option value="buy">Buy</option>
+					  	<option value="sell">Sell</option>
+					</select></p>
+				</div>
+				<div class="col-12 col-lg-3">
+					<p>Price: <input type="number" min="0" id="price" placeholder="Enter the Price(Bath ฿)" style="width: 200px;"></p>
+				</div>
+				<div class="col-12 col-lg-3">
+					<p>Amount: <input type="text" id="amount" placeholder="฿ for Sell, Cryto for Buy" style="width: 200px;"></p>
+				</div>
+				<div class="col-12 col-lg-3">
+					<p>Bank: <input type="text" id="bank" placeholder="Enter the Bank" style="width: 200px;"></p>
+				</div>
+			</div>
+			<div class="row" style="padding: 40px 5vw;">
+				<div class="col-12">
+					<p>Topic Text:</p>
+					<textarea id="topic" rows="4" style="width: 50vw;"></textarea>
+				</div>
+				<div class="col-12">
+					<p>Detail Text:</p>
+					<textarea id="detail" rows="4" style="width: 50vw;"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<button onclick="creOrder()" class="btn btn-primary" style="margin-top: 30px;width: 100px;height: 50px;">Create</button>
+		</div>
+		
+	</div>
+
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-3">
+					<a href="index.html"><img src="img/logo.png" class="logo"></a>
+				</div>
+				<div class="col-6 fmenu">
+						<a href="index.html">Home</a>
+						<a href="history.html" style="margin-left: 9vw;margin-right: 9vw">History</a>
+						<a href="about.html">About us</a>
+				</div>
+				<div class="col-3 fmenu" style="padding-left: 6vw">
+					<p>ที่อยู่ของเรา</p>
+					<p>325/2  หมู่ 5 ถ.เมรี  ซ.เมรี 12 ต. บ้านสวน อ. เมือง  จ. ชลบุรี 20000 </p>
+				</div>
+			</div>
+			<p style="text-align: center;color: white;">@ Created By Shaaw Suan</p>
+		</div>
+	</div>
+	<div id="hidfoot">@ Created By Shaaw Suan</div>
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyA-68aHJCy-TnUtL2oTIg5GIuicB-erIGI",
+    authDomain: "maimai-ed4f5.firebaseapp.com",
+    databaseURL: "https://maimai-ed4f5-default-rtdb.firebaseio.com",
+    projectId: "maimai-ed4f5",
+    storageBucket: "maimai-ed4f5.appspot.com",
+    messagingSenderId: "838420917084",
+    appId: "1:838420917084:web:b9aa02b21c8486dad22f99",
+    measurementId: "G-N9CVFDTW38"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script type="text/javascript" src="db.js"></script>
+</html>
